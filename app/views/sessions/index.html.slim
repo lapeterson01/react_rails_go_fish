@@ -1,1 +1,17 @@
-h1 This is the home page
+.home
+  .home__title
+    h1 Go Fish!
+
+  .home__instruction
+    h4 Login
+
+  = form_for @user, url: sessions_path(@user) do |form|
+    div
+      .field
+        = form.text_field :username, id: :user_username, class: 'name__input', placeholder: 'Username'
+        = form.password_field :password, id: :user_password, class: 'name__input', placeholder: 'Password'
+
+      div
+        = form.submit class: 'name__button', value: 'Go!'
+
+  = link_to 'Sign Up', new_user_path

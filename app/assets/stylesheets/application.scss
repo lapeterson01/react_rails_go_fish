@@ -1,0 +1,24 @@
+@import 'index';
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(to top, #7A6F9B, #13EAF2 50%, #ADF5FF 75%, #C4D7F2);
+    height: 100%;
+}
+
+.container {
+    background-image: image_url('/assets/go_fish_background.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

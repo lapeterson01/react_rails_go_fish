@@ -2,11 +2,12 @@ DOCTYPE
 html
   head
     title Go Fish
-    = csrf_meta_tags
-    = csp_meta_tag
-
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    
+    meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    = stylesheet_link_tag 'application'
 
   body
-    = yield
+    div.container
+      - flash.each do |message_type, message|
+        = content_tag(:div, message, class: "alert alert-#{message_type}")
+      == yield
