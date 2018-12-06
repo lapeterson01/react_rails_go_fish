@@ -1,0 +1,115 @@
+.lobby {
+    background: linear-gradient(to top, #47E5BC, #C4D7F2);
+    border: solid 2px #A5A728;
+    height: 500px;
+    width: 700px;
+    text-align: center;
+    border-radius: 50px;
+    overflow: auto;
+    padding: 25px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, #6FB074, #6FB074 50%, #89AB94);
+    padding-top: 10px;
+}
+
+.navbar--list {
+    max-width: 80%;
+    list-style-type: none;
+    margin: 0;
+    margin-left: 10%;
+    padding: 10px;
+    padding-left: 20px;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar--item {
+    float: left;
+    display: block;
+    font-size: 30px;
+    font-variant: small-caps;
+    color: #D7D968;
+    text-decoration: none;
+}
+
+.logout {
+    float: left;
+    display: block;
+    font-size: 30px;
+    font-variant: small-caps;
+    color: #D7D968;
+    text-decoration: none;
+    background: none;
+    border: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.create-game {
+    float: left;
+    font-variant: small-caps;
+    background: none;
+    border: none;
+    text-align: end;
+    width: 90%;
+    &:hover {
+        cursor: pointer;
+    }
+    font-size: 20px;
+}
+
+.create-game--button {
+    text-decoration: none;
+    color: #A5A728;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.games__title {
+    font-size: 60px;
+    font-variant: small-caps;
+    color: #CDD042;
+    -webkit-text-stroke-color: #A5A728;
+    -webkit-text-stroke-width: 1px;
+}
+
+.games__list {
+    direction: row;
+    list-style-type: none;
+    margin: 0;
+    text-align: center;
+    font-size: 40px;
+    font-variant: small-caps;
+    color: #CDD042;
+    -webkit-text-stroke-color: #A5A728;
+    -webkit-text-stroke-width: 1px;
+    border-top: 2px groove;
+    padding: 30px;
+}
+
+.games__item {
+    text-decoration: none;
+    color: #CDD042;
+    -webkit-text-stroke-color: #A5A728;
+    -webkit-text-stroke-width: 1px;
+    font-size: 35px;
+    padding: 10px;
+    border: 2px ridge;
+    display: flex;
+    justify-content: space-around;
+    &:hover {
+        text-decoration: underline;
+    }
+}

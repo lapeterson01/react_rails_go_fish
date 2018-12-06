@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_212305) do
+ActiveRecord::Schema.define(version: 2018_12_06_155051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_users_on_game_id"
+    t.index ["user_id"], name: "index_game_users_on_user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "name"
+    t.integer "number_of_players"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "host"
+    t.bigint "winner_id"
+    t.index ["winner_id"], name: "index_games_on_winner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -23,4 +43,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_212305) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "game_users", "games"
+  add_foreign_key "game_users", "users"
+  add_foreign_key "games", "users", column: "winner_id"
 end

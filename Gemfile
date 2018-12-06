@@ -7,6 +7,8 @@ ruby '2.5.3'
 gem 'rails', '~> 5.2.2'
 # Use pg as the database for Active Record
 gem 'pg'
+
+gem 'pry'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

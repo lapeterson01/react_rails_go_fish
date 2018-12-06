@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :require_authentication, only: %i[index create]
+
   def index
     @user = User.new
   end
@@ -13,6 +15,11 @@ class SessionsController < ApplicationController
 
     session[:current_user], session[:host] = user.id, []
     redirect_to games_path, notice: 'Logged in successfully'
+  end
+
+  def destroy
+    session[:current_user] = nil
+    redirect_to root_path, notice: 'Logout Successful'
   end
 
   private

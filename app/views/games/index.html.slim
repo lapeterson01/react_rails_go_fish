@@ -1,1 +1,14 @@
-h1 This is the game
+.lobby
+  = render partial: 'navbar'
+
+  .create-game
+    = link_to 'Create Game', new_game_path, class: 'create-game--button'
+
+  h2.games__title Games:
+
+  ul.games__list
+    - unless games.empty?
+      - games.each do |game|
+        .games__item
+          = link_to "#{game.name}", game_path(game.id)
+          = "Players (#{game.data['players'].length}/#{game.number_of_players})"
