@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     render :index, locals: { games: Game.all }
   end
@@ -27,6 +29,22 @@ class GamesController < ApplicationController
     render :show, locals: show_locals(game)
   end
 
+  def update
+    game = Game.find(session[:current_game])
+    game.start_game
+    game_refresh(game.id)
+    redirect_to game, notice: 'Game Started'
+  end
+
+  def play_view(game)
+    render :play, locals: {
+      go_fish: game.go_fish,
+      current_player: game.current_player(session[:current_user]),
+      result: game.format_round_result(session[:current_user]),
+      book_result: game.format_book_result(session[:current_user])
+    }
+  end
+
   private
 
   def game_params
@@ -48,6 +66,10 @@ class GamesController < ApplicationController
   end
 
   def refresh(id)
+    # do nothing for now
+  end
+
+  def game_refresh(id)
     # do nothing for now
   end
 end
