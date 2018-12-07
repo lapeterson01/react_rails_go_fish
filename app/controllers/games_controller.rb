@@ -66,10 +66,10 @@ class GamesController < ApplicationController
   end
 
   def refresh(id)
-    # do nothing for now
+    Pusher.trigger('go-fish', "refresh", { id: id }, socket_id: session[:socket_id])
   end
 
   def game_refresh(id)
-    # do nothing for now
+    Pusher.trigger('go-fish', 'game-refresh', { id: id }, socket_id: session[:socket_id])
   end
 end
