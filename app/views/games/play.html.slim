@@ -1,1 +1,4 @@
-h1 This is the game, for real this time
+.game
+  = render partial: 'navbar'
+
+  = react_component("Game", game.state_for(current_user))

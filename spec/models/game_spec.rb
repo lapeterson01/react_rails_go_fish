@@ -2,8 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
   let(:go_fish) { GoFish.new }
+  let(:test_user1) { User.new name: 'Test User 1', username: 'test_user1', password: 'password', password_confirmation: 'password' }
+  let(:test_user2) { User.new name: 'Test User 2', username: 'test_user2', password: 'password', password_confirmation: 'password' }
   let(:test_game) do
-    Game.new(name: 'test_game', number_of_players: 2, data: go_fish.start.as_json, host: 1)
+    test_user1.save && test_user2.save
+    [Player.new(test_user1), Player.new(test_user2)].each { |player| go_fish.add_player(player) }
+    go_fish.start
+    Game.new(name: 'test_game', number_of_players: 2, data: go_fish.as_json, host: 1)
   end
 
   it 'should be valid' do
@@ -43,6 +48,15 @@ RSpec.describe Game, type: :model do
     it 'should be present' do
       test_game.host = nil
       expect(test_game).to_not be_valid
+    end
+  end
+
+  describe 'state_for' do
+    it 'returns a json version of the game specific to the current user' do
+      test_user = User.new name: 'Test User', username: 'test_user', password: 'password',
+                           password_confirmation: 'password'
+      game_hash = test_game.state_for(test_user)
+      expect(game_hash[:deckCount]).to eq (38)
     end
   end
 end

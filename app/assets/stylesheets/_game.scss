@@ -1,0 +1,24 @@
+.game {
+    background: linear-gradient(to top, #47E5BC, #C4D7F2);
+    border: solid 2px #A5A728;
+    height: 600px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 50px;
+    overflow: auto;
+}
+
+.table {
+    background: linear-gradient(#E0E28E, #B3B560);
+    border: solid 2px #6FB074;
+    height: 80px;
+    width: 200px;
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+}

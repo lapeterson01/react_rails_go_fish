@@ -1,5 +1,7 @@
 class GamesController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: %i[create]
+  skip_before_action :clear_session_if_quit,
+                     only: %i[show play_view update select_card select_player play_round]
 
   def index
     render :index, locals: { games: Game.all }
@@ -38,10 +40,8 @@ class GamesController < ApplicationController
 
   def play_view(game)
     render :play, locals: {
-      go_fish: game.go_fish,
-      current_player: game.current_player(session[:current_user]),
-      result: game.format_round_result(session[:current_user]),
-      book_result: game.format_book_result(session[:current_user])
+      game: game,
+      current_user: current_user
     }
   end
 

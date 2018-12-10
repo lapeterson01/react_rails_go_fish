@@ -44,6 +44,13 @@ RSpec.describe Player, type: :model do
     end
   end
 
+  describe '#books_count' do
+    it 'returns the number of books' do
+      %w[A 10 7 2].each { |rank| player.add_book(rank) }
+      expect(player.books_count).to eq 4
+    end
+  end
+
   describe 'equality' do
     let(:user2) do
       User.new name: 'Player 2', username: 'player2', password: 'password',

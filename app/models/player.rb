@@ -31,6 +31,10 @@ class Player
     books << rank
   end
 
+  def books_count
+    books.count
+  end
+
   def ==(other)
     id == other.id
   end

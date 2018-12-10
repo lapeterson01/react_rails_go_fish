@@ -60,6 +60,12 @@ class Game < ApplicationRecord
     end
   end
 
+  def state_for(user)
+    {
+      deckCount: go_fish.deck.count
+    }
+  end
+
   private
 
   def finalize

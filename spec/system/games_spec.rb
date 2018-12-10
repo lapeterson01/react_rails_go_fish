@@ -110,7 +110,7 @@ RSpec.describe 'Games', type: :system do
       expect(session1 && session2).to have_content 'Fake User'
     end
 
-    xit 'allows the host to start the game' do
+    it 'allows the host to start the game' do
       initiate_game
       expect(session1 && session2).to have_content 'Cards: 7'
       expect(session1 && session2).to have_content 'Books: 0'

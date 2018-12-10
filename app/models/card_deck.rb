@@ -24,6 +24,10 @@ class CardDeck
     cards.shift
   end
 
+  def count
+    cards.count
+  end
+
   def out_of_cards?
     cards.empty?
   end

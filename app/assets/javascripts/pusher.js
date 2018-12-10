@@ -1,7 +1,7 @@
 // .gitignore in production
 Pusher.logToConsole = true;
 
-var pusher = new Pusher('2fb86689f70af2fa9b6a', {
+var pusher = new Pusher('5f61327f553a6b436418', {
   cluster: 'us2',
   forceTLS: true
 });
