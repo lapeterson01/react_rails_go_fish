@@ -19,8 +19,8 @@ class Game < ApplicationRecord
     @go_fish ||= go_fish || GoFish.from_json(data)
   end
 
-  def current_player(user)
-    go_fish.players[user]
+  def find_player(user_id)
+    go_fish.players[user_id]
   end
 
   def players
@@ -61,8 +61,10 @@ class Game < ApplicationRecord
   end
 
   def state_for(user)
+    find_player(user.id)
     {
-      deckCount: go_fish.deck.count
+      deckCount: go_fish.deck.count,
+      currentUser: find_player(user.id).as_json
     }
   end
 

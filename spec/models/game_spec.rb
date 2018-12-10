@@ -53,10 +53,9 @@ RSpec.describe Game, type: :model do
 
   describe 'state_for' do
     it 'returns a json version of the game specific to the current user' do
-      test_user = User.new name: 'Test User', username: 'test_user', password: 'password',
-                           password_confirmation: 'password'
-      game_hash = test_game.state_for(test_user)
+      game_hash = test_game.state_for(test_user1)
       expect(game_hash[:deckCount]).to eq (38)
+      expect(Player.from_json(game_hash[:currentUser].stringify_keys)).to eq (Player.new(test_user1))
     end
   end
 end

@@ -2,7 +2,7 @@ class CardDeck
   attr_reader :cards
 
   RANKS = %w[A K Q J 10 9 8 7 6 5 4 3 2].freeze
-  SUITS = %w[Spades Clubs Diamonds Hearts].freeze
+  SUITS = %w[S C D H].freeze
 
   def initialize(cards = CardDeck.create_standard_deck)
     @cards = cards
@@ -55,7 +55,7 @@ class TestDeck < CardDeck
   attr_reader :cards
 
   RANKS = %w[A K Q J].freeze
-  SUITS = %w[Spades Clubs Diamonds Hearts].freeze
+  SUITS = %w[S C D H].freeze
 
   def initialize(cards = TestDeck.create_test_deck)
     @cards = cards

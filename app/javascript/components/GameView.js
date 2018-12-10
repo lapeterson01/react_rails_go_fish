@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import PlayerView from './PlayerView'
 
-class Game extends Component {
+class GameView extends Component {
   static propTypes = {
-    deckCount: PropTypes.number.isRequired
+    deckCount: PropTypes.number.isRequired,
+    currentUser: PropTypes.object.isRequired
   }
 
   render() {
     return (
-      <div>
+      <div className="game">
         <div>Opponents</div>
         <div className="table">Deck: {this.props.deckCount}</div>
-        <div>Player</div>
+        <PlayerView currentUser={this.props.currentUser} />
       </div>
     )
   }
 }
 
-export default Game
+export default GameView
 
 // <form onSubmit={this.playRound.bind(this)}>
 //   <OpponentListView opponents={opponents} setPlayer={this.setPlayer.bind(this)} selectedPlayer={this.state.selectedPlayer} />
