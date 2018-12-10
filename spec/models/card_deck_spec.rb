@@ -34,7 +34,7 @@ RSpec.describe CardDeck, type: :model do
   describe '#deal' do
     it 'returns the top card from the deck' do
       card = deck1.deal
-      expect(card).to eq PlayingCard.new('A', 'Spades')
+      expect(card).to eq PlayingCard.new('A', 'S')
       expect(deck1.cards.length).to eq 51
     end
   end
