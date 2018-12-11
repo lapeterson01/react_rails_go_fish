@@ -27,6 +27,10 @@ class Game < ApplicationRecord
     data['players'].map { |player| player['name'] }
   end
 
+  def all_players_except(user_id)
+    go_fish.players.reject { |id| id == user_id }
+  end
+
   def add_player_to_game(user)
     data ? go_fish : go_fish(GoFish.new)
     go_fish.add_player(Player.new(user))
@@ -61,10 +65,10 @@ class Game < ApplicationRecord
   end
 
   def state_for(user)
-    find_player(user.id)
     {
       deckCount: go_fish.deck.count,
-      currentUser: find_player(user.id).as_json
+      currentUser: find_player(user.id).as_json,
+      opponents: all_players_except(user.id).values.map(&:opponent_json)
     }
   end
 

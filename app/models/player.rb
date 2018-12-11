@@ -39,6 +39,15 @@ class Player
     id == other.id
   end
 
+  def opponent_json
+    {
+      id: id,
+      name: name,
+      handCount: hand_count,
+      books: books_count
+    }
+  end
+
   def as_json
     {
       id: id,

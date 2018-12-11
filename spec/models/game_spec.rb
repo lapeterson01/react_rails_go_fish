@@ -51,11 +51,30 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe 'all_players_except' do
+    it 'returns all players except for the player with the id provided' do
+      selected_players = test_game.go_fish.players.select { |id, player| id != test_user1.id }
+      expect(test_game.all_players_except(test_user1.id)).to eq selected_players
+    end
+  end
+
   describe 'state_for' do
+    def opponents_arr(user)
+      test_game.all_players_except(user.id).values.map do |opponent|
+        {
+          id: opponent.id,
+          name: opponent.name,
+          handCount: opponent.hand_count,
+          books: opponent.books_count
+        }
+      end
+    end
+
     it 'returns a json version of the game specific to the current user' do
       game_hash = test_game.state_for(test_user1)
       expect(game_hash[:deckCount]).to eq (38)
       expect(Player.from_json(game_hash[:currentUser].stringify_keys)).to eq (Player.new(test_user1))
+      expect(game_hash[:opponents]).to eq opponents_arr(test_user1)
     end
   end
 end

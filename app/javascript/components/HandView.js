@@ -4,7 +4,8 @@ import CardSetView from './CardSetView'
 
 class HandView extends Component {
   static propTypes = {
-    hand: PropTypes.object.isRequired
+    hand: PropTypes.object.isRequired,
+    setRank: PropTypes.func.isRequired
   }
 
   render() {
@@ -14,8 +15,8 @@ class HandView extends Component {
       return (
         <li key={rank} className="hand--card-item">
           <ul className="card--list">
-            <CardSetView rank={rank} cards={cards} />
-        	</ul>
+            <CardSetView rank={rank} cards={cards} setRank={this.props.setRank} />
+          </ul>
         </li>
       )
     })

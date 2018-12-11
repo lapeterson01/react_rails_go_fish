@@ -5,7 +5,8 @@ import HandView from './HandView'
 
 class PlayerView extends Component {
   static propTypes = {
-    currentUser: PropTypes.object.isRequired
+    currentUser: PropTypes.object.isRequired,
+    setRank: PropTypes.func.isRequired
   }
 
   currentUser() {
@@ -23,7 +24,7 @@ class PlayerView extends Component {
         </div>
 
         <ul className="hand--card-list">
-          <HandView hand={this.currentUser().handKlass()} />
+          <HandView hand={this.currentUser().handKlass()} setRank={this.props.setRank} />
         </ul>
       </div>
     )
