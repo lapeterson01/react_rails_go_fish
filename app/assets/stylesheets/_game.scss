@@ -61,3 +61,13 @@
     width: auto;
     min-width: 100px;
 }
+
+.card--list {
+    position: absolute;
+}
+
+.card {
+    left: 10px;
+    position: absolute;
+    list-style: none;
+}

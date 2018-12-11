@@ -112,6 +112,7 @@ RSpec.describe 'Games', type: :system do
 
     it 'allows the host to start the game' do
       initiate_game
+      session1.save_and_open_page
       expect(session1 && session2).to have_content 'Cards: 7'
       expect(session1 && session2).to have_content 'Books: 0'
     end

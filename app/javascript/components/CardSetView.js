@@ -9,8 +9,13 @@ class CardSetView extends Component {
 
   render() {
     return this.props.cards.map((card, index) => {
+      const cardImg = require(`images/cards/${card.toString()}.png`)
       let top = index * 20
-      return <li key={this.props.rank} className="card" style={{top: `${top}`, zIndex: `${index}`}}>{card.toString()}</li>
+      return (
+        <li key={card.toString()} className="card" style={{top: `${top}px`, zIndex: `${index}`}}>
+          <img src={cardImg} alt="card" />
+        </li>
+      )
     })
   }
 }
