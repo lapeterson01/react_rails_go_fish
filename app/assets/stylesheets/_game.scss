@@ -107,11 +107,11 @@ $suits: s c d h;
 
 .hidden {
     visibility: hidden;
-    &:checked + label {
+    &:checked + .opponent {
         outline-style: solid;
     }
 }
 
-.hidden + label {
+.hidden + .opponent {
     cursor: pointer;
 }
