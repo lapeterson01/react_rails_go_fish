@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import OpponentListView from './OpponentListView'
 import PlayerView from './PlayerView'
 
 class GameView extends Component {
@@ -11,7 +12,7 @@ class GameView extends Component {
   render() {
     return (
       <div className="game">
-        <div>Opponents</div>
+        <OpponentListView />
         <div className="table">Deck: {this.props.deckCount}</div>
         <PlayerView currentUser={this.props.currentUser} />
       </div>

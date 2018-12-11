@@ -11,7 +11,6 @@ class Player {
   constructor(id, name, hand, books) {
     this._id = id
     this._name = name
-    // this._hand = hand.map((card) => PlayingCard.fromJson(card))
     this._hand = new Hand(hand)
     this._books = books
   }
