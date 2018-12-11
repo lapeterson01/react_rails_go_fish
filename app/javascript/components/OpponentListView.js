@@ -11,7 +11,6 @@ class OpponentListView extends Component {
   render() {
     const selectedPlayer = this.props.selectedPlayer
     return this.props.opponents.map((opponent) => {
-      console.log(selectedPlayer === opponent.name)
       return (
         <label key={opponent.id} className="game-list-item" onClick={this.props.setPlayer}>
           <input type="radio" value={opponent.name} name="opponent" defaultChecked={selectedPlayer == opponent.name} className="hidden" />

@@ -37,7 +37,7 @@ RSpec.describe 'Sessions', type: :system do
     signup
     expect(page).to have_content 'Go Fish!'
     user = User.find_by(name: 'Jermaine Thiel', username: 'ja_real_thiel')
-    expect(!!user.authenticate('password')).to eq true # rubocop:disable Style/DoubleNegation
+    expect(!!user.authenticate('password')).to eq true
   end
 
   it 'allows user to signin' do

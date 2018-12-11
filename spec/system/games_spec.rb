@@ -46,9 +46,9 @@ RSpec.describe 'Games', type: :system do
     sessions.each { |session| session.visit game_url(game.id) }
   end
 
-  def play_round(player_id, rank)
-    session1.choose("card_#{rank}")
-    session1.choose("player_#{player_id}")
+  def play_round(player_name, rank)
+    # session1.choose("card_#{rank}")
+    session1.choose(player_name, visible: false)
     session1.click_on 'Play!'
     session2.driver.refresh
   end
@@ -71,6 +71,10 @@ RSpec.describe 'Games', type: :system do
     test_user2.save
     sessions << session1
     test_users << test_user << test_user2
+  end
+
+  after do
+    session1.reset!
   end
 
   it 'allows user to go to games lobby' do
@@ -100,6 +104,10 @@ RSpec.describe 'Games', type: :system do
       sessions << session2
     end
 
+    after do
+      session2.reset!
+    end
+
     it 'allows a user to join a game' do
       signin(sessions)
       create_game
@@ -123,8 +131,8 @@ RSpec.describe 'Games', type: :system do
         initiate_game_with_test_deck
       end
 
-      xit 'allows players to play a round' do
-        play_round(player2.id, 'J')
+      it 'allows players to play a round' do
+        play_round(player2.name, 'J')
         expect(session1 && session2).to have_content('Cards: 8') && have_content('Cards: 6')
         expect(session1).to have_content "You took J of Clubs from #{test_user2.name}"
         expect(session2).to have_content "#{test_user.name} took J of Clubs from you"

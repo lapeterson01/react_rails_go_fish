@@ -25,13 +25,20 @@ class GameView extends Component {
     this.setState(() => { return { selectedRank } })
   }
 
+  playRound(event) {
+    event.preventDefault()
+
+    // TODO: ajax request to send state to server
+    console.log(this.state)
+  }
+
   render() {
     return (
-      <div className="game">
+      <form onSubmit={this.playRound.bind(this)} className="game">
         <OpponentListView opponents={this.props.opponents} setPlayer={this.setPlayer.bind(this)} selectedPlayer={this.state.selectedPlayer} />
         <div className="table">Deck: {this.props.deckCount}</div>
         <PlayerView currentUser={this.props.currentUser} setRank={this.setRank.bind(this)} />
-      </div>
+      </form>
     )
   }
 }
