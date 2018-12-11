@@ -63,11 +63,10 @@ RSpec.describe 'Games', type: :system do
   end
   let(:test_users) { [] }
   let(:game_name) { 'test_game' }
-  let(:session1) { Capybara::Session.new(:rack_test, Rails.application) }
+  let(:session1) { Capybara::Session.new(:selenium_chrome_headless, Rails.application) }
   let(:sessions) { [] }
 
   before do
-    driven_by :rack_test
     test_user.save
     test_user2.save
     sessions << session1
@@ -95,7 +94,7 @@ RSpec.describe 'Games', type: :system do
   end
 
   describe 'two users' do
-    let(:session2) { Capybara::Session.new(:rack_test, Rails.application) }
+    let(:session2) { Capybara::Session.new(:selenium_chrome_headless, Rails.application) }
 
     before do
       sessions << session2
@@ -112,7 +111,6 @@ RSpec.describe 'Games', type: :system do
 
     it 'allows the host to start the game' do
       initiate_game
-      session1.save_and_open_page
       expect(session1 && session2).to have_content 'Cards: 7'
       expect(session1 && session2).to have_content 'Books: 0'
     end

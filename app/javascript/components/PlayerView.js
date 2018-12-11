@@ -23,7 +23,7 @@ class PlayerView extends Component {
         </div>
 
         <ul className="hand--card-list">
-          <HandView hand={this.currentUser().hand()} />
+          <HandView hand={this.currentUser().handKlass()} />
         </ul>
       </div>
     )

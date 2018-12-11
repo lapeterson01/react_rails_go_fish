@@ -19,8 +19,12 @@ class Player {
     return this._name
   }
 
-  hand() {
+  handKlass() {
     return this._hand
+  }
+
+  hand() {
+    return this.handKlass().cards()
   }
 
   books() {

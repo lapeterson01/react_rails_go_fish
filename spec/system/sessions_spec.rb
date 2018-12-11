@@ -23,7 +23,7 @@ RSpec.describe 'Sessions', type: :system do
   let(:test_user) { { name: 'Jermaine Thiel', username: 'ja_real_thiel', password: 'password' } }
 
   before do
-    driven_by :rack_test
+    driven_by :selenium_chrome_headless
   end
 
   it 'shows signin page' do
