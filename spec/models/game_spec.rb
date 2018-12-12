@@ -71,7 +71,9 @@ RSpec.describe Game, type: :model do
     end
 
     it 'returns a json version of the game specific to the current user' do
+      test_game.save
       game_hash = test_game.state_for(test_user1)
+      expect(game_hash[:id]).to eq (test_game.id)
       expect(game_hash[:deckCount]).to eq (38)
       expect(Player.from_json(game_hash[:currentUser].stringify_keys)).to eq (Player.new(test_user1))
       expect(game_hash[:opponents]).to eq opponents_arr(test_user1)

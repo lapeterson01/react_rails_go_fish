@@ -12,12 +12,12 @@ class OpponentListView extends Component {
     const selectedPlayer = this.props.selectedPlayer
     return this.props.opponents.map((opponent) => {
       return (
-        <label key={opponent.id} className="game-list-item" onClick={this.props.setPlayer}>
-          <input type="radio" value={opponent.name} name="opponent" defaultChecked={selectedPlayer == opponent.name} className="hidden" />
+        <label key={opponent.id()} className="game-list-item" onClick={this.props.setPlayer}>
+          <input type="radio" value={opponent.id()} name="opponent" defaultChecked={selectedPlayer == opponent.name()} className="hidden" />
           <div className="opponent">
-            <div>{opponent.name}</div>
-            <div>Cards: {opponent.countHand}</div>
-            <div>Books: {opponent.books}</div>
+            <div>{opponent.name()}</div>
+            <div>Cards: {opponent.handCount()}</div>
+            <div>Books: {opponent.books()}</div>
           </div>
         </label>
       )

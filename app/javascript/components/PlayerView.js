@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Player from '../models/Player'
 import HandView from './HandView'
 
 class PlayerView extends Component {
@@ -9,22 +8,17 @@ class PlayerView extends Component {
     setRank: PropTypes.func.isRequired
   }
 
-  currentUser() {
-    if (!this._currentUser) this._currentUser = Player.fromJson(this.props.currentUser)
-    return this._currentUser
-  }
-
   render() {
     return (
       <div className="current-player__hand">
         <div className="current-player__info">
-          <div>Cards: {this.currentUser().handCount()}</div>
-          <div>{this.currentUser().name()}</div>
-          <div>Books: {this.currentUser().booksCount()}</div>
+          <div>Cards: {this.props.currentUser.handCount()}</div>
+          <div>{this.props.currentUser.name()}</div>
+          <div>Books: {this.props.currentUser.booksCount()}</div>
         </div>
 
         <ul className="hand--card-list">
-          <HandView hand={this.currentUser().handKlass()} setRank={this.props.setRank} />
+          <HandView hand={this.props.currentUser.hand()} setRank={this.props.setRank} />
         </ul>
       </div>
     )

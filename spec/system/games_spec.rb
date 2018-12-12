@@ -131,7 +131,7 @@ RSpec.describe 'Games', type: :system do
         initiate_game_with_test_deck
       end
 
-      it 'allows players to play a round' do
+      xit 'allows players to play a round' do
         play_round(player2.name, 'J')
         expect(session1 && session2).to have_content('Cards: 8') && have_content('Cards: 6')
         expect(session1).to have_content "You took J of Clubs from #{test_user2.name}"

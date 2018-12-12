@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: %i[create]
+  skip_before_action :verify_authenticity_token, only: %i[create play_round]
   skip_before_action :clear_session_if_quit,
-                     only: %i[show play_view update select_card select_player play_round]
+                     only: %i[show play_view update play_round]
 
   def index
     render :index, locals: { games: Game.all }
@@ -23,12 +23,15 @@ class GamesController < ApplicationController
 
   def show
     session[:current_game] = params['id']
-    game = Game.find(params['id'])
-    return game_over_view(game) if game.winner
+    @game = Game.find(params['id'])
+    @current_user = current_user
+    return game_over_view(@game) if @game.winner
 
-    return play_view(game) if game.data['started']
-
-    render :show, locals: show_locals(game)
+    respond_to do |format|
+      format.html
+      format.json { render json: @game.state_for(@current_user) }
+    end
+    # render :show, locals: show_locals(game)
   end
 
   def update
@@ -38,11 +41,25 @@ class GamesController < ApplicationController
     redirect_to game, notice: 'Game Started'
   end
 
-  def play_view(game)
-    render :play, locals: {
-      game: game,
-      current_user: current_user
-    }
+  # def play_view(game)
+  #   respond_to do |format|
+  #     format.html { render html: :play { game: game, current_user: current_user } }
+  #     format.json { render json: game.state_for(current_user) }
+  #   end
+  # end
+
+  def play_round
+    game = Game.find(params['id'])
+    unless params['selectedPlayer'] && params['selectedRank']
+      return redirect_to game, notice: 'You must choose a player/card'
+    end
+
+    game.play_round(params['selectedPlayer'], params['selectedRank'])
+    respond_to do |format|
+      format.html { redirect_to game }
+      format.json { render json: game.state_for(current_user) }
+    end
+    game_refresh(game.id)
   end
 
   private
@@ -53,16 +70,6 @@ class GamesController < ApplicationController
     args = params.require(:game).permit(:name, :number_of_players).to_h
     args['host'] = current_user.id
     args
-  end
-
-  def show_locals(game)
-    {
-      players: game.players,
-      current_player: User.find(session[:current_user]),
-      id: game.id,
-      host: game.host,
-      started: game.data['started']
-    }
   end
 
   def refresh(id)

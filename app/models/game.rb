@@ -43,6 +43,12 @@ class Game < ApplicationRecord
     finalize
   end
 
+  def play_round(player_id, rank)
+    go_fish.play_round(player_id, rank)
+    self.winner = User.find(go_fish.winner.id) if go_fish.winner
+    finalize
+  end
+
   def format_round_result(current_user)
     return unless go_fish.round_result && go_fish.round_result['cards']
 
@@ -66,6 +72,7 @@ class Game < ApplicationRecord
 
   def state_for(user)
     {
+      id: id,
       deckCount: go_fish.deck.count,
       currentUser: find_player(user.id).as_json,
       opponents: all_players_except(user.id).values.map(&:opponent_json)

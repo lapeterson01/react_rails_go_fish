@@ -2,29 +2,19 @@ import Hand from './Hand'
 import PlayingCard from './PlayingCard'
 
 class Player {
-  static fromJson(jsonPlayer) {
-    let id, name, hand, books
-    ({ id, name, hand, books } = jsonPlayer)
-    return new this(id, name, hand, books)
-  }
-
-  constructor(id, name, hand, books) {
-    this._id = id
-    this._name = name
-    this._hand = new Hand(hand)
-    this._books = books
+  constructor(json) {
+    this._id = json.id
+    this._name = json.name
+    this._hand = new Hand(json.hand)
+    this._books = json.books
   }
 
   name() {
     return this._name
   }
 
-  handKlass() {
-    return this._hand
-  }
-
   hand() {
-    return this.handKlass().cards()
+    return this._hand
   }
 
   books() {
@@ -32,7 +22,7 @@ class Player {
   }
 
   handCount() {
-    return this.hand().length
+    return this.hand().count()
   }
 
   booksCount() {
@@ -40,11 +30,7 @@ class Player {
   }
 
   handAsObject() {
-    this.hand().reduce((obj, item) => {
-      if (!obj[item.rank()]) obj[item.rank()] = [];
-      obj[item.rank()].push(item);
-      return obj
-    }, {})
+    this.hand().asObject()
   }
 }
 
