@@ -97,6 +97,10 @@ $suits: s c d h;
 
 .card--list {
     position: absolute;
+    min-width: 100px;
+    height: 100px;
+    padding: 0;
+    padding-right: 20px;
 }
 
 .card {
@@ -109,6 +113,9 @@ $suits: s c d h;
     visibility: hidden;
     &:checked + .opponent {
         outline-style: solid;
+    }
+    &:checked + .card--list {
+      outline-style: solid;
     }
 }
 

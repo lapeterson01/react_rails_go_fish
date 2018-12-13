@@ -36,19 +36,22 @@ class GameView extends Component {
 
   setPlayer(event) {
     const selectedPlayer = event.target.value
-    this.setState(() => { return { selectedPlayer } })
+    this.setState({ selectedPlayer }, () => {
+      this._playRoundIfPossible()
+    })
   }
 
   setRank(event) {
     const selectedRank = event.target.value
-    this.setState(() => { return { selectedRank } })
+    this.setState({ selectedRank }, () => {
+      this._playRoundIfPossible()
+    })
   }
 
   playRound(event) {
     event.preventDefault()
     const { selectedPlayer, selectedRank } = this.state
 
-    // const setState = this.setState.bind(this)
     fetch(`/play-round/${this.state.game.id()}`, {
       method: 'POST',
       headers: {
@@ -88,17 +91,42 @@ class GameView extends Component {
       )
   }
 
+  _playRoundIfPossible() {
+    if (!this.state.selectedPlayer || !this.state.selectedRank) return
+
+    const { selectedPlayer, selectedRank } = this.state
+
+    fetch(`/play-round/${this.state.game.id()}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ selectedPlayer, selectedRank })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          const game = new Game(result)
+          this.setState(() => { return { game, selectedPlayer: null, selectedRank: null } })
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }
+
   render() {
     return (
-      <form onSubmit={this.playRound.bind(this)} className="game">
+      <div onSubmit={this.playRound.bind(this)} className="game">
         <OpponentListView
           opponents={this.state.game.opponents()}
           setPlayer={this.setPlayer.bind(this)}
           selectedPlayer={this.state.selectedPlayer}
         />
         <div className="table">Deck: {this.state.game.deckCount()}</div>
-        <PlayerView currentUser={this.state.game.currentUser()} setRank={this.setRank.bind(this)} />
-      </form>
+        <PlayerView currentUser={this.state.game.currentUser()} setRank={this.setRank.bind(this)} selectedRank={this.state.selectedRank} />
+      </div>
     )
   }
 }
