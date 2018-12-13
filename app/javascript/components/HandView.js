@@ -5,6 +5,7 @@ import CardSetView from './CardSetView'
 class HandView extends Component {
   static propTypes = {
     hand: PropTypes.object.isRequired,
+    isCurrentPlayer: PropTypes.bool.isRequired,
     setRank: PropTypes.func.isRequired,
     selectedRank: PropTypes.string
   }
@@ -13,6 +14,16 @@ class HandView extends Component {
     return Object.entries(this.props.hand.asObject()).map((set) => {
       const rank = set[0]
       const cards = set[1]
+      if (!this.props.isCurrentPlayer) {
+        return (
+          <li key={rank} className="hand--card-item">
+            <ul className="card--list">
+              <CardSetView cards={cards} />
+            </ul>
+          </li>
+        )
+      }
+
       return (
         <li key={rank} className="hand--card-item">
           <label onClick={this.props.setRank}>

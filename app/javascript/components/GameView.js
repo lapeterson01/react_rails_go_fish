@@ -49,6 +49,10 @@ class GameView extends Component {
     })
   }
 
+  _isCurrentPlayer() {
+    return this.state.game.currentUser().id() === this.state.game.currentPlayer().id
+  }
+
   _fetchGame() {
     fetch(`/games/${this.state.game.id()}`, {
       headers: {
@@ -98,11 +102,17 @@ class GameView extends Component {
       <div className="game">
         <OpponentListView
           opponents={this.state.game.opponents()}
+          isCurrentPlayer={this._isCurrentPlayer()}
           setPlayer={this.setPlayer.bind(this)}
           selectedPlayer={this.state.selectedPlayer}
         />
         <div className="table">Deck: {this.state.game.deckCount()}</div>
-        <PlayerView currentUser={this.state.game.currentUser()} setRank={this.setRank.bind(this)} selectedRank={this.state.selectedRank} />
+        <PlayerView
+          currentUser={this.state.game.currentUser()}
+          isCurrentPlayer={this._isCurrentPlayer()}
+          setRank={this.setRank.bind(this)}
+          selectedRank={this.state.selectedRank}
+        />
         <div>It is {this.state.game.currentPlayer().name}'s turn</div>
       </div>
     )

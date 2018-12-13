@@ -12,7 +12,6 @@ $suits: s c d h;
       background-position: center;
       width: 100px;
       height: 100px;
-      cursor: pointer;
     }
   }
 }
@@ -121,6 +120,10 @@ $suits: s c d h;
 
 .hidden + .opponent {
     cursor: pointer;
+}
+
+.hidden + .card--list {
+  cursor: pointer;
 }
 
 .game-over--title {

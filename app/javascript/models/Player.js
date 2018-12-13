@@ -9,6 +9,10 @@ class Player {
     this._books = json.books
   }
 
+  id() {
+    return this._id
+  }
+
   name() {
     return this._name
   }
