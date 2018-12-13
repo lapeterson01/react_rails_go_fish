@@ -16,9 +16,14 @@ class HandView extends Component {
       return (
         <li key={rank} className="hand--card-item">
           <label onClick={this.props.setRank}>
-            <input className="hidden" type="radio" value={rank} checked={this.props.selectedRank === rank} />
+            <input
+              className="hidden"
+              type="radio"
+              value={rank}
+              checked={this.props.selectedRank === rank}
+            />
             <ul className="card--list">
-              <CardSetView rank={rank} cards={cards} setRank={this.props.setRank} selectedRank={this.props.selectedRank} />
+              <CardSetView cards={cards} />
             </ul>
           </label>
         </li>

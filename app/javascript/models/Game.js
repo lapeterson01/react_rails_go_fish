@@ -6,6 +6,7 @@ class Game {
     this._id = json.id
     this._deckCount = json.deckCount
     this._currentUser = new Player(json.currentUser)
+    this._currentPlayer = json.currentPlayer
     this._opponents = json.opponents.map((opp) => new Opponent(opp))
   }
 
@@ -19,6 +20,10 @@ class Game {
 
   currentUser() {
     return this._currentUser
+  }
+
+  currentPlayer() {
+    return this._currentPlayer
   }
 
   opponents() {

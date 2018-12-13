@@ -31,6 +31,7 @@ class GameView extends Component {
     id: PropTypes.number.isRequired,
     deckCount: PropTypes.number.isRequired,
     currentUser: PropTypes.object.isRequired,
+    currentPlayer: PropTypes.object.isRequired,
     opponents: PropTypes.array.isRequired
   }
 
@@ -46,30 +47,6 @@ class GameView extends Component {
     this.setState({ selectedRank }, () => {
       this._playRoundIfPossible()
     })
-  }
-
-  playRound(event) {
-    event.preventDefault()
-    const { selectedPlayer, selectedRank } = this.state
-
-    fetch(`/play-round/${this.state.game.id()}`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ selectedPlayer, selectedRank })
-    })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          const game = new Game(result)
-          this.setState(() => { return { game, selectedPlayer: null, selectedRank: null } })
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
   }
 
   _fetchGame() {
@@ -118,7 +95,7 @@ class GameView extends Component {
 
   render() {
     return (
-      <div onSubmit={this.playRound.bind(this)} className="game">
+      <div className="game">
         <OpponentListView
           opponents={this.state.game.opponents()}
           setPlayer={this.setPlayer.bind(this)}
@@ -126,6 +103,7 @@ class GameView extends Component {
         />
         <div className="table">Deck: {this.state.game.deckCount()}</div>
         <PlayerView currentUser={this.state.game.currentUser()} setRank={this.setRank.bind(this)} selectedRank={this.state.selectedRank} />
+        <div>It is {this.state.game.currentPlayer().name}'s turn</div>
       </div>
     )
   }

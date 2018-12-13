@@ -3,10 +3,7 @@ import PropTypes from 'prop-types'
 
 class CardSetView extends Component {
   static propTypes = {
-    rank: PropTypes.string.isRequired,
-    cards: PropTypes.array.isRequired,
-    setRank: PropTypes.func.isRequired,
-    selectedRank: PropTypes.string
+    cards: PropTypes.array.isRequired
   }
 
   render() {

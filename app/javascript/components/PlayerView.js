@@ -19,7 +19,11 @@ class PlayerView extends Component {
         </div>
 
         <ul className="hand--card-list">
-          <HandView hand={this.props.currentUser.hand()} setRank={this.props.setRank} selectedRank={this.props.selectedRank} />
+          <HandView
+            hand={this.props.currentUser.hand()}
+            setRank={this.props.setRank}
+            selectedRank={this.props.selectedRank}
+          />
         </ul>
       </div>
     )
