@@ -1,0 +1,8 @@
+div.game
+    = render partial: 'navbar'
+
+    div.game-over--title
+        h1 Game Over!
+
+    div.game-over--message
+        h3 Winner: #{@game.winner.name}

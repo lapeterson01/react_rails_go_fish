@@ -25,13 +25,12 @@ class GamesController < ApplicationController
     session[:current_game] = params['id']
     @game = Game.find(params['id'])
     @current_user = current_user
-    return game_over_view(@game) if @game.winner
+    render :game_over if @game.winner
 
     respond_to do |format|
       format.html
       format.json { render json: @game.state_for(@current_user) }
     end
-    # render :show, locals: show_locals(game)
   end
 
   def update
@@ -40,13 +39,6 @@ class GamesController < ApplicationController
     game_refresh(game.id)
     redirect_to game, notice: 'Game Started'
   end
-
-  # def play_view(game)
-  #   respond_to do |format|
-  #     format.html { render html: :play { game: game, current_user: current_user } }
-  #     format.json { render json: game.state_for(current_user) }
-  #   end
-  # end
 
   def play_round
     game = Game.find(params['id'])
