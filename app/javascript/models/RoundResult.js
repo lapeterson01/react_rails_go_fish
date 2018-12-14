@@ -28,6 +28,10 @@ class RoundResult {
     return `${this._askerToString()} ${this.target() ? 'took' : 'drew'} ${this._cardsToString()} from ${this.target() ? this._targetToString() : 'the deck'}`
   }
 
+  turnMessage() {
+    return `It is ${this.game().isHumanPlayer(this.game().currentPlayer().id) ? 'your' : `${this.game().currentPlayer().name}'s`} turn`
+  }
+
   _askerToString() {
     return this.game().isHumanPlayer(this.asker().id()) ? 'You' : this.asker().name()
   }

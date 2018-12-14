@@ -129,8 +129,7 @@ class GameView extends Component {
           setRank={this.setRank.bind(this)}
           selectedRank={this.state.selectedRank}
         />
-        <RoundResultView roundResult={this.state.game.roundResult().toString()} />
-        <div>It is {this.state.game.currentPlayer().name}'s turn</div>
+        <RoundResultView roundResult={this.state.game.roundResult()} />
       </div>
     )
   }

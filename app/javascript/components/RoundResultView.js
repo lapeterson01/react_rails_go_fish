@@ -3,11 +3,16 @@ import PropTypes from 'prop-types'
 
 class RoundResultView extends Component {
   static propTypes = {
-    roundResult: PropTypes.string
+    roundResult: PropTypes.object
   }
 
   render() {
-    return <div>{this.props.roundResult}</div>
+    return (
+      <div className="play">
+        <div>{this.props.roundResult.toString()}</div>
+        <div>{this.props.roundResult.turnMessage()}</div>
+      </div>
+    )
   }
 }
 
