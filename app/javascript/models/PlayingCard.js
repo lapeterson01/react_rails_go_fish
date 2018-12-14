@@ -1,13 +1,7 @@
 class PlayingCard {
-  static fromJson(jsonCard) {
-    let rank, suit
-    ({ rank, suit } = jsonCard)
-    return new this(rank, suit)
-  }
-
-  constructor(rank, suit) {
-    this._rank = rank
-    this._suit = suit
+  constructor(json) {
+    this._rank = json.rank
+    this._suit = json.suit
   }
 
   rank() {

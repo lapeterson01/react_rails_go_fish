@@ -10,6 +10,21 @@
     "react_ujs": "^2.4.4"
   },
   "devDependencies": {
+    "babel-jest": "^23.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.6.0",
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "jest": {
+    "roots": [
+      "spec/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript"
+    ]
   }
 }

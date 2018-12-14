@@ -67,4 +67,8 @@ class GoFish
     deck == other.deck && players == other.players && turn == other.turn &&
       round_result == other.round_result && started == other.started
   end
+
+  def card_deck_or_test_deck
+    deck.instance_of CardDeck ? CardDeck : TestDeck
+  end
 end

@@ -108,7 +108,7 @@ class GameView extends Component {
             <h2>Game Over!</h2>
           </div>
           <div className="game-over--message">
-            <h4>Winner {this.state.game.winner().name}</h4>
+            <h4>Winner: {this.state.game.winner().name}</h4>
           </div>
         </div>
       )

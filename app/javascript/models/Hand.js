@@ -2,7 +2,7 @@ import PlayingCard from './PlayingCard'
 
 class Hand {
   constructor(cards) {
-    this._cards = cards.map((card) => PlayingCard.fromJson(card))
+    this._cards = cards.map((card) => new PlayingCard(card))
   }
 
   cards() {
