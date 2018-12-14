@@ -1,5 +1,6 @@
 import Player from './Player'
 import Opponent from './Opponent'
+import RoundResult from './RoundResult'
 
 class Game {
   constructor(json) {
@@ -9,6 +10,7 @@ class Game {
     this._currentPlayer = json.currentPlayer
     this._opponents = json.opponents.map((opp) => new Opponent(opp))
     this._winner = json.winner
+    this._roundResult = new RoundResult(json.roundResult, this)
   }
 
   id() {
@@ -33,6 +35,24 @@ class Game {
 
   winner() {
     return this._winner
+  }
+
+  roundResult() {
+    return this._roundResult
+  }
+
+  allPlayers() {
+    return this.opponents().concat(this.currentUser())
+  }
+
+  playerById(id) {
+    return this.allPlayers().find((player) => {
+      return player.id() === id
+    })
+  }
+
+  isHumanPlayer(id) {
+    return id === this.currentUser().id()
   }
 }
 

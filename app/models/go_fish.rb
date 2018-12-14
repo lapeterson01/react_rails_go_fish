@@ -5,7 +5,7 @@ class GoFish
 
   DEAL_AMOUNT = 7
 
-  def initialize(deck = TestDeck.new, players = {}, turn = nil, round_result = nil, started = false)
+  def initialize(deck = CardDeck.new, players = {}, turn = nil, round_result = nil, started = false)
     @deck = deck
     @players = players
     @turn = turn
@@ -59,7 +59,7 @@ class GoFish
       data['round_result']['cards'].map! { |card| PlayingCard.from_json(card) }
     end
     players = data['players'].map { |player| [player['id'], Player.from_json(player)] }.to_h
-    new TestDeck.from_json(data['deck']), players, data['turn'], data['round_result'],
+    new CardDeck.from_json(data['deck']), players, data['turn'], data['round_result'],
         data['started']
   end
 

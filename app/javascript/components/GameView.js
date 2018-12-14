@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Game from '../models/Game'
 import OpponentListView from './OpponentListView'
 import PlayerView from './PlayerView'
+import RoundResultView from './RoundResultView'
 
 class GameView extends Component {
   constructor(props) {
@@ -33,7 +34,8 @@ class GameView extends Component {
     currentUser: PropTypes.object.isRequired,
     currentPlayer: PropTypes.object.isRequired,
     opponents: PropTypes.array.isRequired,
-    winner: PropTypes.object
+    winner: PropTypes.object,
+    roundResult: PropTypes.object
   }
 
   setPlayer(event) {
@@ -127,6 +129,7 @@ class GameView extends Component {
           setRank={this.setRank.bind(this)}
           selectedRank={this.state.selectedRank}
         />
+        <RoundResultView roundResult={this.state.game.roundResult().toString()} />
         <div>It is {this.state.game.currentPlayer().name}'s turn</div>
       </div>
     )

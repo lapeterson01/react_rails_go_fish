@@ -49,26 +49,37 @@ class Game < ApplicationRecord
     finalize
   end
 
-  def format_round_result(current_user)
+  def round_result
     return unless go_fish.round_result && go_fish.round_result['cards']
 
     cards = go_fish.round_result['cards'].map(&:to_s)
-    if go_fish.round_result['turn'].to_i == current_user
-      current_user_round_result(cards)
-    else
-      other_users_round_result(cards, current_user)
-    end
+    {
+      asker: go_fish.round_result['turn'],
+      cards: cards,
+      target: go_fish.round_result['card_from']
+    }
   end
 
-  def format_book_result(current_user)
-    return unless go_fish.round_result && go_fish.round_result['books']
-
-    if go_fish.round_result['books'].to_i == current_user
-      'You got a book!'
-    else
-      "#{go_fish.players[go_fish.round_result['books'].to_i].name} got a book!"
-    end
-  end
+  # def format_round_result(current_user)
+  #   return unless go_fish.round_result && go_fish.round_result['cards']
+  #
+  #   cards = go_fish.round_result['cards'].map(&:to_s)
+  #   if go_fish.round_result['turn'].to_i == current_user
+  #     current_user_round_result(cards)
+  #   else
+  #     other_users_round_result(cards, current_user)
+  #   end
+  # end
+  #
+  # def format_book_result(current_user)
+  #   return unless go_fish.round_result && go_fish.round_result['books']
+  #
+  #   if go_fish.round_result['books'].to_i == current_user
+  #     'You got a book!'
+  #   else
+  #     "#{go_fish.players[go_fish.round_result['books'].to_i].name} got a book!"
+  #   end
+  # end
 
   def state_for(user)
     {
@@ -77,7 +88,8 @@ class Game < ApplicationRecord
       currentUser: find_player(user.id).as_json,
       currentPlayer: { id: go_fish.turn, name: find_player(go_fish.turn).name },
       opponents: all_players_except(user.id).values.map(&:opponent_json),
-      winner: go_fish.winner ? go_fish.winner.as_json : go_fish.winner
+      winner: go_fish.winner ? go_fish.winner.as_json : go_fish.winner,
+      roundResult: round_result
     }
   end
 

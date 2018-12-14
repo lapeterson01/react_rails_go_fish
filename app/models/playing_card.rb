@@ -13,6 +13,10 @@ class PlayingCard
     }
   end
 
+  def to_s
+    "#{rank} of #{suit}"
+  end
+
   def self.from_json(data)
     new(data['rank'], data['suit'])
   end

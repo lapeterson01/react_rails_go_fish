@@ -36,6 +36,10 @@ class Player {
   handAsObject() {
     this.hand().asObject()
   }
+
+  isHumanPlayer() {
+    
+  }
 }
 
 export default Player

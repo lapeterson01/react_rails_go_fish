@@ -4,19 +4,20 @@ module GoFishRoundHelper
   def set_player_and_rank(player_id, rank)
     @selected_player = players[player_id.to_i]
     @selected_rank = rank
-    @round_result = { turn: turn, card_from: player_id, rank_asked_for: rank }
+    @round_result = { turn: turn, rank_asked_for: rank }
   end
 
   def player_has_card
     round_result[:cards] = selected_player.give_up_cards(selected_rank).each do |card|
       players[turn].retrieve_card(card)
     end
+    round_result[:card_from] = selected_player.id
     @get_catch = true
   end
 
   def go_fish
     round_result[:cards] = [deck.deal].each { |card| players[turn].retrieve_card(card) }
-    round_result[:card_from] = 'pool'
+    round_result[:card_from] = nil
     @get_catch = false
   end
 
