@@ -25,7 +25,6 @@ class GamesController < ApplicationController
     session[:current_game] = params['id']
     @game = Game.find(params['id'])
     @current_user = current_user
-    render :game_over if @game.winner
 
     respond_to do |format|
       format.html
@@ -36,8 +35,8 @@ class GamesController < ApplicationController
   def update
     game = Game.find(session[:current_game])
     game.start_game
-    game_refresh(game.id)
-    redirect_to game, notice: 'Game Started'
+    refresh(game.id)
+    redirect_to game
   end
 
   def play_round

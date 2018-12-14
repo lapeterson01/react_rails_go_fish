@@ -21,3 +21,8 @@ channel.bind("refresh", function(data) {
     window.location.reload();
   };
 });
+channel.bind("game-lobby-refresh", function(data) {
+  if(window.location.pathname == `/games/${data.id}`) {
+    window.location.reload();
+  };
+});

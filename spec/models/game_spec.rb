@@ -78,6 +78,7 @@ RSpec.describe Game, type: :model do
       expect(Player.from_json(game_hash[:currentUser].stringify_keys)).to eq (Player.new(test_user1))
       expect(game_hash[:currentPlayer]).to eq ( { id: test_user1.id, name: test_user1.name })
       expect(game_hash[:opponents]).to eq opponents_arr(test_user1)
+      expect(game_hash[:winner]).to eq nil
     end
   end
 end

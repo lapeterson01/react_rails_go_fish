@@ -26,7 +26,7 @@ class HandView extends Component {
 
       return (
         <li key={rank} className="hand--card-item">
-          <label onClick={this.props.setRank}>
+          <label onClick={this.props.setRank} id={`card_${rank}`}>
             <input
               className="hidden"
               type="radio"

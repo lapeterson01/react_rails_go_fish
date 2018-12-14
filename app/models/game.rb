@@ -76,7 +76,8 @@ class Game < ApplicationRecord
       deckCount: go_fish.deck.count,
       currentUser: find_player(user.id).as_json,
       currentPlayer: { id: go_fish.turn, name: find_player(go_fish.turn).name },
-      opponents: all_players_except(user.id).values.map(&:opponent_json)
+      opponents: all_players_except(user.id).values.map(&:opponent_json),
+      winner: go_fish.winner ? go_fish.winner.as_json : go_fish.winner
     }
   end
 

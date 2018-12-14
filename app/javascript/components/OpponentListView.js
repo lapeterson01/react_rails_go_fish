@@ -24,7 +24,7 @@ class OpponentListView extends Component {
       }
 
       return (
-        <label key={opponent.id()} className="game-list-item" onClick={this.props.setPlayer}>
+        <label key={opponent.id()} id={`opponent_${opponent.id()}`} className="game-list-item" onClick={this.props.setPlayer}>
           <input
             type="radio"
             value={opponent.id()}

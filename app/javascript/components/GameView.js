@@ -32,7 +32,8 @@ class GameView extends Component {
     deckCount: PropTypes.number.isRequired,
     currentUser: PropTypes.object.isRequired,
     currentPlayer: PropTypes.object.isRequired,
-    opponents: PropTypes.array.isRequired
+    opponents: PropTypes.array.isRequired,
+    winner: PropTypes.object
   }
 
   setPlayer(event) {
@@ -98,6 +99,19 @@ class GameView extends Component {
   }
 
   render() {
+    if (this.state.game.winner()) {
+      return (
+        <div className="game">
+          <div className="game-over--title">
+            <h2>Game Over!</h2>
+          </div>
+          <div className="game-over--message">
+            <h4>Winner {this.state.game.winner().name}</h4>
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div className="game">
         <OpponentListView

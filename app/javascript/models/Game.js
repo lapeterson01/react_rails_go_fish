@@ -8,6 +8,7 @@ class Game {
     this._currentUser = new Player(json.currentUser)
     this._currentPlayer = json.currentPlayer
     this._opponents = json.opponents.map((opp) => new Opponent(opp))
+    this._winner = json.winner
   }
 
   id() {
@@ -28,6 +29,10 @@ class Game {
 
   opponents() {
     return this._opponents
+  }
+
+  winner() {
+    return this._winner
   }
 }
 
